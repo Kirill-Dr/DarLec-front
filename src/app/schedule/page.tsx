@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./page.module.css";
 import axios from "axios";
-import { Schedule } from "@/app/_components/Schedule/Schedule";
+import { ScheduleComponent } from "@/app/_components/Schedule/Schedule";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/_redux/store";
 import { setLessons } from "@/app/_redux/features/scheduleSlice";
@@ -24,7 +24,7 @@ export default function SchedulePage() {
   return (
     <div className={styles.schedule__container}>
       <h1 className={styles.schedule__title}>Расписание</h1>
-      <Schedule lessons={lessons} />
+      <ScheduleComponent lessons={lessons} />
     </div>
   );
 }

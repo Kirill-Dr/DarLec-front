@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Schedule.module.css";
 import { Lesson, ScheduleProps } from "@/app/_interfaces/Schedule";
 
-export const Schedule: React.FC<ScheduleProps> = ({ lessons }) => {
+export const ScheduleComponent: React.FC<ScheduleProps> = ({ lessons }) => {
   const lessonsByDay = lessons.reduce<Record<string, Lesson[]>>(
     (acc, lesson) => {
       (acc[lesson.day] = acc[lesson.day] || []).push(lesson);

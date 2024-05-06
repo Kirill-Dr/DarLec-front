@@ -6,7 +6,7 @@ import Logo from "@/app/_images/logo.svg";
 import Link from "next/link";
 import gsap from "gsap";
 
-export const Header: React.FC = () => {
+export const HeaderComponent: React.FC = () => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [windowWidth, setWindowWidth] = useState<number>(
     typeof window !== "undefined" ? window.innerWidth : 0,
@@ -70,7 +70,7 @@ export const Header: React.FC = () => {
               <Link href="/schedule">Расписание</Link>
             </li>
             <li className={styles.nav__item}>
-              <Link href="/">Домашняя работа</Link>
+              <Link href="/homework">Домашняя работа</Link>
             </li>
           </ul>
         </div>
