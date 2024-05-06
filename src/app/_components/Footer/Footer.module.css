@@ -1,0 +1,56 @@
+.footer {
+  height: 90px;
+  color: white;
+  width: 100%;
+  border-top: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+}
+
+.company__name {
+  font-size: 1.2em;
+}
+
+.company__contact {
+  display: flex;
+  font-size: 1em;
+}
+
+.company__contact > * {
+  margin: 0 5px;
+}
+
+.company__email > a {
+  color: white;
+}
+
+@media screen and (max-width: 950px) {
+  .footer {
+    padding: 0;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .company__contact {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .company__email {
+    margin-bottom: 10px;
+  }
+
+  .line {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .company__contact {
+    font-size: 0.9em;
+  }
+}
