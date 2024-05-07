@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/_redux/store";
 import { setLessons } from "@/app/_redux/features/scheduleSlice";
 import { GET_LESSONS } from "@/app/_helpers/consts";
+import { ScrollToTop } from "@/app/_components/ScrollToTop/ScrollToTop";
 
 export default function SchedulePage() {
   const lessons = useSelector((state: RootState) => state.schedule.lessons);
@@ -23,6 +24,7 @@ export default function SchedulePage() {
 
   return (
     <div className={styles.schedule__container}>
+      <ScrollToTop />
       <h1 className={styles.schedule__title}>Расписание</h1>
       <ScheduleComponent lessons={lessons} />
     </div>

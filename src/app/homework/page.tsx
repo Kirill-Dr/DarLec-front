@@ -7,6 +7,7 @@ import axios from "axios";
 import { GET_HOMEWORK } from "@/app/_helpers/consts";
 import { setHomework } from "@/app/_redux/features/homeworkSlice";
 import { HomeworkComponent } from "@/app/_components/Homework/Homework";
+import { ScrollToTop } from "@/app/_components/ScrollToTop/ScrollToTop";
 
 export default function HomeworkPage() {
   const homework = useSelector((state: RootState) => state.homework.homework);
@@ -23,6 +24,7 @@ export default function HomeworkPage() {
 
   return (
     <div className={styles.homework__container}>
+      <ScrollToTop />
       <h1 className={styles.homework__title}>Домашняя работа</h1>
       <HomeworkComponent homework={homework} />
     </div>

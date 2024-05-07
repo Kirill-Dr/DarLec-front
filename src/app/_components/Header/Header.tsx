@@ -5,6 +5,7 @@ import styles from "./Header.module.css";
 import Logo from "@/app/_images/logo.svg";
 import Link from "next/link";
 import gsap from "gsap";
+import BurgerButton from "@/app/_components/BurgerButton/BurgerButton";
 
 export const HeaderComponent: React.FC = () => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -61,7 +62,7 @@ export const HeaderComponent: React.FC = () => {
             <Image src={Logo} height={30} alt="Logo" priority={true} />
           </Link>
         </div>
-        <div className={styles.header__nav_container}>
+        <nav className={styles.header__nav_container}>
           <ul className={styles.header__nav}>
             <li className={styles.nav__item}>
               <Link href="/">Лекции</Link>
@@ -73,12 +74,12 @@ export const HeaderComponent: React.FC = () => {
               <Link href="/homework">Домашняя работа</Link>
             </li>
           </ul>
-        </div>
+        </nav>
         <div className={styles.burger__container} onClick={toggleOpened}>
-          {isOpened ? <>Opened</> : <>Closed</>}
+          <BurgerButton isOpened={isOpened} />
         </div>
       </header>
-      <div className={styles.header__nav_mobile}>
+      <nav className={styles.header__nav_mobile}>
         <ul className={styles.nav__mobile}>
           <Link href="/" onClick={() => setIsOpened(false)}>
             <li>Лекции</li>
@@ -86,11 +87,11 @@ export const HeaderComponent: React.FC = () => {
           <Link href="/schedule" onClick={() => setIsOpened(false)}>
             <li>Расписание</li>
           </Link>
-          <Link href="/" onClick={() => setIsOpened(false)}>
+          <Link href="/homework" onClick={() => setIsOpened(false)}>
             <li>Домашняя работа</li>
           </Link>
         </ul>
-      </div>
+      </nav>
     </>
   );
 };

@@ -18,4 +18,5 @@ html {
 
 .main__container {
   padding-top: 90px;
+  min-height: 100dvh;
 }
