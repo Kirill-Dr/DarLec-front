@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Homework.module.css";
 import { Homework, HomeworkProps } from "@/app/_interfaces/Homework";
 
 export const HomeworkComponent: React.FC<HomeworkProps> = ({ homework }) => {
@@ -11,16 +12,15 @@ export const HomeworkComponent: React.FC<HomeworkProps> = ({ homework }) => {
   );
 
   return (
-    <div>
+    <div className={styles.homework__container}>
       {Object.entries(homeworkBySubject).map(([subject, homework]) => (
-        <div key={subject}>
+        <div key={subject} className={styles.homework__mainContainer}>
           <hr />
-          <h2>{subject}</h2>
+          <h2 className={styles.homework__subjectName}>{subject}</h2>
           <hr />
           {homework.map((homework) => (
-            <div key={homework._id}>
-              <div>{homework.task}</div>
-              <div>{homework.date}</div>
+            <div key={homework._id} className={styles.task__container}>
+              <p className={styles.task__info}>{homework.task}</p>
             </div>
           ))}
         </div>

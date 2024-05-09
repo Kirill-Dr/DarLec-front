@@ -7,3 +7,13 @@
   font-size: 2.5em;
   text-align: center;
 }
+
+@media screen and (max-width: 460px) {
+  .homework__container {
+    margin: 8% auto;
+  }
+
+  .homework__title {
+    font-size: 2em;
+  }
+}

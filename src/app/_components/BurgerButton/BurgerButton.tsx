@@ -8,9 +8,9 @@ interface BurgerButtonProps {
 const BurgerButton: React.FC<BurgerButtonProps> = ({ isOpened }) => {
   return (
     <div className={styles.burger}>
-      <div className={`${styles.line} ${isOpened ? styles.open : ""}`} />
-      <div className={`${styles.line} ${isOpened ? styles.open : ""}`} />
-      <div className={`${styles.line} ${isOpened ? styles.open : ""}`} />
+      <div className={`${styles.line} ${isOpened ? styles.open : null}`} />
+      <div className={`${styles.line} ${isOpened ? styles.open : null}`} />
+      <div className={`${styles.line} ${isOpened ? styles.open : null}`} />
     </div>
   );
 };

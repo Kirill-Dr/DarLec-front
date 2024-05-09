@@ -6,5 +6,4 @@ export interface Homework {
   _id: string;
   subject: string;
   task: string;
-  date: string;
 }

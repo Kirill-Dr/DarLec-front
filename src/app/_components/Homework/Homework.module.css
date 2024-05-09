@@ -1,0 +1,53 @@
+.homework__container {
+  margin: 20px auto 0;
+  width: 85%;
+}
+
+.homework__mainContainer {
+  text-align: center;
+  margin-top: 4%;
+  border: 3px solid white;
+  border-radius: 15px;
+  padding: 3% 5%;
+}
+
+.homework__subjectName {
+  margin: 1% 0;
+  font-size: 2em;
+}
+
+.task__container {
+  margin: 4% auto;
+  border-left: 4px dashed white;
+  border-right: 4px dashed white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-radius: 50px;
+  padding: 1% 6%;
+  font-size: 1.8em;
+}
+
+@media screen and (max-width: 850px) {
+  .task__container {
+    margin: 6% auto;
+    padding-top: 3%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .homework__container {
+    width: 95%;
+  }
+
+  .homework__mainContainer {
+    padding: 5%;
+  }
+
+  .homework__subjectName {
+    font-size: 1.7em;
+  }
+
+  .task__container {
+    font-size: 0.9em;
+  }
+}
