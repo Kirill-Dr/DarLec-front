@@ -24,7 +24,7 @@
   border-bottom: 1px solid white;
   border-radius: 50px;
   padding: 1% 6%;
-  font-size: 1.8em;
+  font-size: 1.4em;
 }
 
 @media screen and (max-width: 850px) {
@@ -44,7 +44,7 @@
   }
 
   .homework__subjectName {
-    font-size: 1.7em;
+    font-size: 1em;
   }
 
   .task__container {

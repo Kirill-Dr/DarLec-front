@@ -23,10 +23,10 @@ export default function SchedulePage() {
   }, [dispatch]);
 
   return (
-    <div className={styles.schedule__container}>
+    <section className={styles.schedule__container}>
       <ScrollToTop />
       <h1 className={styles.schedule__title}>Расписание</h1>
       <ScheduleComponent lessons={lessons} />
-    </div>
+    </section>
   );
 }

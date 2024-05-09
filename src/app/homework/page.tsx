@@ -23,10 +23,10 @@ export default function HomeworkPage() {
   }, [dispatch]);
 
   return (
-    <div className={styles.homework__container}>
+    <section className={styles.homework__container}>
       <ScrollToTop />
       <h1 className={styles.homework__title}>Домашняя работа</h1>
       <HomeworkComponent homework={homework} />
-    </div>
+    </section>
   );
 }
