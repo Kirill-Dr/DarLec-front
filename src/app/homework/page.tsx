@@ -8,10 +8,15 @@ import { GET_HOMEWORK } from "@/app/_helpers/consts";
 import { setHomework } from "@/app/_redux/features/homeworkSlice";
 import { HomeworkComponent } from "@/app/_components/Homework/Homework";
 import { ScrollToTop } from "@/app/_components/ScrollToTop/ScrollToTop";
+import { redirect } from "next/navigation";
 
 export default function HomeworkPage() {
   const homework = useSelector((state: RootState) => state.homework.homework);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    redirect("/signUp");
+  }, []);
 
   useEffect(() => {
     const fetchHomework = async () => {
