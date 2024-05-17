@@ -1,18 +1,20 @@
 "use client";
 import { signup } from "@/app/(auth)/_actions/auth";
-import { FormEvent, useState } from "react";
-import { AxiosError } from "axios";
+import React, { useState } from "react";
 
 export default function SignUpPage() {
-  const [error, setError] = useState<string | null>(null);
+  const [errorValidation, setErrorValidation] = useState<string>();
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target as HTMLFormElement);
-    try {
-      await signup(formData);
-    } catch (error) {
-      if (error instanceof AxiosError) setError(error.response?.data?.message);
+    const formData = new FormData(event.currentTarget);
+    const result = await signup(formData);
+
+    if (result?.errors) {
+      const validationErrors = Object.values(result.errors).flat();
+      setErrorValidation(validationErrors[0]);
+    } else {
+      console.log("Пользователь успешно зарегистрирован!");
     }
   };
 
@@ -28,18 +30,18 @@ export default function SignUpPage() {
       </div>
       <div>
         <label htmlFor="password">Пароль</label>
-        <input name="password" type="password" placeholder="Пароль" />
+        <input name="password" type="text" placeholder="Пароль" />
       </div>
       <div>
         <label htmlFor="confirmPassword">Подтверждение пароля</label>
         <input
           name="confirmPassword"
-          type="password"
+          type="text"
           placeholder="Подтверждение пароля"
         />
       </div>
-      {error && <div>{error}</div>}
       <button type="submit">Регистрация</button>
+      {errorValidation && <p style={{ color: "red" }}>{errorValidation}</p>}
     </form>
   );
 }
