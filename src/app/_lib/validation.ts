@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const SignUpFormSchema = z
+export const SignupFormSchema = z
   .object({
     username: z
       .string()
@@ -23,9 +23,7 @@ export const SignUpFormSchema = z
         message: "Пароль должен содержать хотя бы один специальный символ",
       })
       .trim(),
-    confirmPassword: z.string().min(8, {
-      message: "Подтверждающий пароль должен содержать не менее 8 символов",
-    }),
+    confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],

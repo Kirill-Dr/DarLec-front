@@ -15,7 +15,7 @@ export default function HomeworkPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    redirect("/signUp");
+    redirect("/signup");
   }, []);
 
   useEffect(() => {

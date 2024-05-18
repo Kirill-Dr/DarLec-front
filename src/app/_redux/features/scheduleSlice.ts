@@ -17,8 +17,9 @@ export const scheduleSlice = createSlice({
     setLessons: (state, action: PayloadAction<Lesson[]>) => {
       state.lessons = action.payload;
     },
+    resetLessons: () => initialState,
   },
 });
 
-export const { setLessons } = scheduleSlice.actions;
+export const { setLessons, resetLessons } = scheduleSlice.actions;
 export default scheduleSlice.reducer;

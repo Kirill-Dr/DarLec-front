@@ -6,6 +6,7 @@ import Logo from "@/app/_images/logo.svg";
 import Link from "next/link";
 import gsap from "gsap";
 import BurgerButton from "@/app/_components/BurgerButton/BurgerButton";
+import Cookies from "js-cookie";
 
 export const HeaderComponent: React.FC = () => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
