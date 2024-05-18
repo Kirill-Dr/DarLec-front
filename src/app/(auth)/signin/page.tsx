@@ -1,11 +1,14 @@
 "use client";
 import { signin } from "@/app/(auth)/_actions/actions";
 import React, { useState } from "react";
-import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { resetLessons } from "@/app/_redux/features/scheduleSlice";
+import { useRouter } from "next/navigation";
+import { HeaderComponent } from "@/app/_components/Header/Header";
+import Link from "next/link";
+import ScrollToTop from "@/app/_components/ScrollToTop/ScrollToTop";
 
 export default function SigninPage() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [errorValidation, setErrorValidation] = useState<string>();
 
@@ -24,29 +27,29 @@ export default function SigninPage() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <>
+      <HeaderComponent />
+      <div>
+        <ScrollToTop />
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email">Почта</label>
+            <input name="email" placeholder="Почта" />
+          </div>
+          <div>
+            <label htmlFor="password">Пароль</label>
+            <input name="password" type="password" placeholder="Пароль" />
+          </div>
+          <button type="submit">Вход</button>
+          {errorValidation && <p style={{ color: "red" }}>{errorValidation}</p>}
+        </form>
         <div>
-          <label htmlFor="email">Почта</label>
-          <input name="email" placeholder="Почта" />
+          Нет Аккаунта?{" "}
+          <Link href="/signup" scroll={false}>
+            Зарегестрироваться
+          </Link>
         </div>
-        <div>
-          <label htmlFor="password">Пароль</label>
-          <input name="password" type="text" placeholder="Пароль" />
-        </div>
-        <button type="submit">Регистрация</button>
-        {errorValidation && <p style={{ color: "red" }}>{errorValidation}</p>}
-      </form>
-      <button
-        onClick={() => {
-          Cookies.remove("access_token");
-          Cookies.remove("refresh_token");
-          dispatch(resetLessons());
-          console.log("Вышел");
-        }}
-      >
-        Выйти
-      </button>
-    </div>
+      </div>
+    </>
   );
 }

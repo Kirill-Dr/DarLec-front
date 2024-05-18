@@ -80,4 +80,7 @@ export async function signin(formData: FormData) {
   }
 }
 
-export async function logout() {}
+export async function logout() {
+  Cookies.remove("access_token");
+  Cookies.remove("refresh_token");
+}

@@ -18,8 +18,9 @@ export const homeworkSlice = createSlice({
     setHomework: (state, action: PayloadAction<Homework[]>) => {
       state.homework = action.payload;
     },
+    resetHomework: () => initialState,
   },
 });
 
-export const { setHomework } = homeworkSlice.actions;
+export const { setHomework, resetHomework } = homeworkSlice.actions;
 export default homeworkSlice.reducer;

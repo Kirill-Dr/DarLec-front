@@ -7,38 +7,31 @@ import Link from "next/link";
 import gsap from "gsap";
 import BurgerButton from "@/app/_components/BurgerButton/BurgerButton";
 import Cookies from "js-cookie";
+import { resetLessons } from "@/app/_redux/features/scheduleSlice";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { logout } from "@/app/(auth)/_actions/actions";
+import { resetHomework } from "@/app/_redux/features/homeworkSlice";
 
 export const HeaderComponent: React.FC = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const [windowWidth, setWindowWidth] = useState<number>(
-    typeof window !== "undefined" ? window.innerWidth : 0,
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); // Изменено
 
   const toggleOpened = () => {
     setIsOpened(!isOpened);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (windowWidth >= 1030) {
-      setIsOpened(false);
-    }
-  }, [windowWidth]);
+  const handleLogout = async () => {
+    await logout();
+    dispatch(resetLessons());
+    dispatch(resetHomework());
+  };
 
   useEffect(() => {
     if (isOpened) {
-      gsap.to(`.${styles.header__nav_mobile}`, {
+      gsap.to(`.${styles.header__nav}`, {
         display: "block",
         opacity: 1,
         duration: 1,
@@ -46,7 +39,7 @@ export const HeaderComponent: React.FC = () => {
         y: -100,
       });
     } else {
-      gsap.to(`.${styles.header__nav_mobile}`, {
+      gsap.to(`.${styles.header__nav}`, {
         display: "none",
         opacity: 0,
         duration: 0.7,
@@ -55,42 +48,63 @@ export const HeaderComponent: React.FC = () => {
     }
   }, [isOpened]);
 
+  useEffect(() => {
+    setIsAuthenticated(!!Cookies.get("access_token"));
+  }, []);
+
   return (
     <>
       <header className={styles.header}>
         <div>
-          <Link href="/">
+          <Link href="/" scroll={false}>
             <Image src={Logo} height={30} alt="Logo" priority={true} />
           </Link>
         </div>
-        <nav className={styles.header__nav_container}>
-          <ul className={styles.header__nav}>
-            <li className={styles.nav__item}>
-              <Link href="/">Лекции</Link>
-            </li>
-            <li className={styles.nav__item}>
-              <Link href="/schedule">Расписание</Link>
-            </li>
-            <li className={styles.nav__item}>
-              <Link href="/homework">Домашняя работа</Link>
-            </li>
-          </ul>
-        </nav>
         <div className={styles.burger__container} onClick={toggleOpened}>
           <BurgerButton isOpened={isOpened} />
         </div>
       </header>
-      <nav className={styles.header__nav_mobile}>
-        <ul className={styles.nav__mobile}>
-          <Link href="/" onClick={() => setIsOpened(false)}>
+      <nav className={styles.header__nav}>
+        <ul className={styles.nav__container}>
+          <Link href="/" scroll={false} onClick={() => setIsOpened(false)}>
             <li>Лекции</li>
           </Link>
-          <Link href="/schedule" onClick={() => setIsOpened(false)}>
+          <Link
+            href="/schedule"
+            scroll={false}
+            onClick={() => setIsOpened(false)}
+          >
             <li>Расписание</li>
           </Link>
-          <Link href="/homework" onClick={() => setIsOpened(false)}>
+          <Link
+            href="/homework"
+            scroll={false}
+            onClick={() => setIsOpened(false)}
+          >
             <li>Домашняя работа</li>
           </Link>
+          {isAuthenticated === null ? null : isAuthenticated ? (
+            <Link href="/" scroll={false} onClick={handleLogout}>
+              <li>Выйти</li>
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/signin"
+                scroll={false}
+                onClick={() => setIsOpened(false)}
+              >
+                <li>Войти</li>
+              </Link>
+              <Link
+                href="/signup"
+                scroll={false}
+                onClick={() => setIsOpened(false)}
+              >
+                <li>Зарегистрироваться</li>
+              </Link>
+            </>
+          )}
         </ul>
       </nav>
     </>
