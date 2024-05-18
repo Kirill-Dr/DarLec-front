@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { HeaderComponent } from "@/app/_components/Header/Header";
 import ScrollToTop from "@/app/_components/ScrollToTop/ScrollToTop";
+import { requestWithToken } from "@/app/(auth)/_actions/refreshToken";
 
 export default function SchedulePage() {
   const router = useRouter();
@@ -20,13 +21,12 @@ export default function SchedulePage() {
   useEffect(() => {
     if (Cookies.get("access_token")) {
       const fetchLessons = async () => {
-        const response = await axios.get(GET_LESSONS, {
-          headers: { Authorization: `Bearer ${Cookies.get("access_token")}` },
-        });
+        const response = await requestWithToken(GET_LESSONS);
         dispatch(setLessons(response.data));
       };
       fetchLessons();
     } else {
+      console.log("Пользователь не авторизован");
       router.push("/signin");
     }
   }, [dispatch, router]);
