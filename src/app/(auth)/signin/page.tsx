@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { HeaderComponent } from "@/app/_components/Header/Header";
 import Link from "next/link";
 import ScrollToTop from "@/app/_components/ScrollToTop/ScrollToTop";
+import styles from "../forms.module.css";
 
 export default function SigninPage() {
   const router = useRouter();
@@ -21,29 +22,41 @@ export default function SigninPage() {
       const validationErrors = Object.values(result.errors).flat();
       setErrorValidation(validationErrors[0]);
     } else {
-      console.log(result?.data);
-      console.log("Пользователь успешно авторизирован!");
+      router.push("/");
     }
   };
 
   return (
     <>
       <HeaderComponent />
-      <div>
+      <div className={styles.form__mainContainer}>
         <ScrollToTop />
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Почта</label>
-            <input name="email" placeholder="Почта" />
+        <form onSubmit={handleSubmit} className={styles.form__container}>
+          <div className={styles.input__container}>
+            <label htmlFor="email">Почта:</label>
+            <input
+              name="email"
+              placeholder="Почта"
+              className={styles.input__block}
+            />
           </div>
-          <div>
-            <label htmlFor="password">Пароль</label>
-            <input name="password" type="password" placeholder="Пароль" />
+          <div className={styles.input__container}>
+            <label htmlFor="password">Пароль:</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Пароль"
+              className={styles.input__block}
+            />
           </div>
-          <button type="submit">Вход</button>
-          {errorValidation && <p style={{ color: "red" }}>{errorValidation}</p>}
+          <button type="submit" className={styles.action__button}>
+            Вход
+          </button>
+          {errorValidation && (
+            <p className={styles.error__text}>{errorValidation}</p>
+          )}
         </form>
-        <div>
+        <div className={styles.account__container}>
           Нет Аккаунта?{" "}
           <Link href="/signup" scroll={false}>
             Зарегестрироваться

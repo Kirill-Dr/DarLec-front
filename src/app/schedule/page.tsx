@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import styles from "./page.module.css";
-import axios from "axios";
 import { ScheduleComponent } from "@/app/_components/Schedule/Schedule";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/_redux/store";
@@ -26,7 +25,6 @@ export default function SchedulePage() {
       };
       fetchLessons();
     } else {
-      console.log("Пользователь не авторизован");
       router.push("/signin");
     }
   }, [dispatch, router]);

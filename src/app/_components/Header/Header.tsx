@@ -17,7 +17,7 @@ export const HeaderComponent: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); // Изменено
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   const toggleOpened = () => {
     setIsOpened(!isOpened);
@@ -27,6 +27,8 @@ export const HeaderComponent: React.FC = () => {
     await logout();
     dispatch(resetLessons());
     dispatch(resetHomework());
+    router.push("/");
+    window.location.reload();
   };
 
   useEffect(() => {
