@@ -20,7 +20,7 @@ export default function SignupPage() {
       const validationErrors = Object.values(result.errors).flat();
       setErrorValidation(validationErrors[0]);
     } else {
-      router.push("/signin");
+      router.push("/signin", { scroll: false });
     }
   };
 

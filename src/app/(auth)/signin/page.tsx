@@ -22,7 +22,7 @@ export default function SigninPage() {
       const validationErrors = Object.values(result.errors).flat();
       setErrorValidation(validationErrors[0]);
     } else {
-      router.push("/");
+      router.push("/", { scroll: false });
     }
   };
 

@@ -8,7 +8,7 @@ import gsap from "gsap";
 import BurgerButton from "@/app/_components/BurgerButton/BurgerButton";
 import Cookies from "js-cookie";
 import { resetLessons } from "@/app/_redux/features/scheduleSlice";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logout } from "@/app/(auth)/_actions/actions";
 import { resetHomework } from "@/app/_redux/features/homeworkSlice";
@@ -24,11 +24,10 @@ export const HeaderComponent: React.FC = () => {
   };
 
   const handleLogout = async () => {
-    await logout();
     dispatch(resetLessons());
     dispatch(resetHomework());
-    router.push("/");
-    window.location.reload();
+    setIsOpened(false);
+    await logout().then(() => router.refresh());
   };
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export const HeaderComponent: React.FC = () => {
 
   useEffect(() => {
     setIsAuthenticated(!!Cookies.get("access_token"));
-  }, []);
+  }, [Cookies.get("access_token")]);
 
   return (
     <>
@@ -68,27 +67,32 @@ export const HeaderComponent: React.FC = () => {
       </header>
       <nav className={styles.header__nav}>
         <ul className={styles.nav__container}>
-          <Link href="/" scroll={false} onClick={() => setIsOpened(false)}>
-            <li>Лекции</li>
-          </Link>
-          <Link
-            href="/schedule"
-            scroll={false}
-            onClick={() => setIsOpened(false)}
-          >
-            <li>Расписание</li>
-          </Link>
-          <Link
-            href="/homework"
-            scroll={false}
-            onClick={() => setIsOpened(false)}
-          >
-            <li>Домашняя работа</li>
-          </Link>
           {isAuthenticated === null ? null : isAuthenticated ? (
-            <Link href="/" scroll={false} onClick={handleLogout}>
-              <li>Выйти</li>
-            </Link>
+            <>
+              <Link href="/" scroll={false} onClick={() => setIsOpened(false)}>
+                <li>Лекции</li>
+              </Link>
+              <Link
+                href="/schedule"
+                scroll={false}
+                onClick={() => setIsOpened(false)}
+              >
+                <li>Расписание</li>
+              </Link>
+              <Link
+                href="/homework"
+                scroll={false}
+                onClick={() => setIsOpened(false)}
+              >
+                <li>Домашняя работа</li>
+              </Link>
+              <Link href="/profile" scroll={false}>
+                <li>Профиль</li>
+              </Link>
+              <Link href="/" scroll={false} onClick={handleLogout}>
+                <li>Выйти</li>
+              </Link>
+            </>
           ) : (
             <>
               <Link

@@ -1,14 +1,12 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
+import { REFRESH_TOKEN } from "@/app/_helpers/consts";
 
 async function refreshToken() {
   try {
-    const { data } = await axios.post(
-      "http://localhost:3000/api/auth/refresh",
-      {
-        refreshToken: Cookies.get("refresh_token"),
-      },
-    );
+    const { data } = await axios.post(REFRESH_TOKEN, {
+      refreshToken: Cookies.get("refresh_token"),
+    });
     Cookies.set("access_token", data.access_token);
     Cookies.set("refresh_token", data.refresh_token);
   } catch (error) {

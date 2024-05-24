@@ -24,8 +24,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 11vh;
-    margin-bottom: 15%;
+    height: 12vh;
+    margin-bottom: 12%;
 }
 
 .input__block {
@@ -76,4 +76,65 @@
 
 .account__container > a {
     color: white;
+}
+
+@media screen and (max-width: 1200px) {
+    .form__container {
+        width: 50%;
+    }
+
+    .error__text {
+        height: 10vh;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .form__container {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .form__container {
+        width: 80%;
+        padding: 7%;
+    }
+
+    .input__container {
+        height: 15vh;
+    }
+
+    .input__block {
+        padding: 5px 10px;
+    }
+
+    .error__text {
+        height: 15vh;
+    }
+
+    .account__container {
+        margin-top: 8%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .form__container {
+        width: 90%;
+    }
+
+    .input__container {
+        font-size: 1.2em;
+    }
+
+    .error__text {
+        font-size: 0.9em;
+    }
+
+    .action__button {
+        font-size: 1em;
+    }
+
+    .account__container {
+        font-size: 0.9em;
+    }
 }
